@@ -87,17 +87,28 @@ are updated.
 
 *-i, --install*=_METHODS_::
 Package install method. _METHODS_ is a comma-separated list
-of: `instsys`, `repo`, `rpm` (default: `instsys,repo,rpm`). +
+of: `instsys`, `repo`, `rpm` (default (Agama): `instsys,repo`, default (YaST): `instsys,repo,rpm`). +
 - `instsys`: unpack packages in installation system +
 - `repo`: create repo with all packages and register with
-  yast before starting installation; repo will be removed
+  Agama or YaST before starting installation; repo will be removed
   after the installation +
 - `rpm`: install packages at the end of the installation
-  using rpm (that is, not via repo & zypper) +
+  using rpm (that is, not via repo & zypper) - this method is
+  not available for Agama +
+
+*--initrd*=_RPM|DIR_::
+Add RPM or content of DIR to initrd instead of instsys. +
+Option can be repeated to add several packages or directories.
+
+*--installer*=_INSTALLER_::
+Set installation program. Either agama or yast (default: auto-detected based on dist). +
+It is usually not necessary to use this option. There are minor differences in handling driver updates
+between Agama and YaST, though. mkdud takes these into account.
 
 *--config*=_KEY_=_VALUE_::
-Set linuxrc config option _KEY_ to _VALUE_. The options are changed
+Set initrd config option _KEY_ to _VALUE_. The options are changed
 just after the driver update has been loaded. +
+You can set boot options using KEY 'boot'. +
 Option can be repeated to set several options.
 
 *--no-docs*::
